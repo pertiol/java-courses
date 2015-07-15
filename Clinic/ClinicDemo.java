@@ -8,14 +8,19 @@ import java.util.*;
 public class ClinicDemo {
 	
 	public static void main(String args[]) {
+		// Create new scanner
 		Scanner scan = new Scanner(System.in).useLocale(Locale.US);
+		// Create new clinic of size 10
 		Clinic myClinic = new Clinic(10);
 		/**
 		 * Fill client list
 		 */
 		myClinic.fillList();
+		// user enter
 		int enter = 1;
+		// user ID (position in array)
 		int ID = 0;
+		// type of pet
 		int type = 0;
 		try {
 			do {
@@ -33,6 +38,7 @@ public class ClinicDemo {
 					if(type == 1) {
 						System.out.println("\nEnter ID, name of client, name of his pet, e.g. \"1 Mike Poppy\"");
 						ID = scan.nextInt();
+						// check for prevent outbound exception
 						if (ID < 1 || ID > 10) {
 							System.out.println("\nInvalid ID.");
 							continue;
