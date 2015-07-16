@@ -11,91 +11,104 @@ public class ClinicDemo {
 	public static void main(String args[]) {
 		// Create new scanner
 		Scanner scan = new Scanner(System.in).useLocale(Locale.US);
-		// Create new clinic of size 10
-		Clinic myClinic = new Clinic(10);
+        int size = 20;
+		// Create new clinic with size in size
+		Clinic myClinic = new Clinic(size);
 		// user enter
 		int enter = 1;
 		// user ID (position in array)
 		int ID = 0;
 		// type of pet
 		int type = 0;
+        // user input
+        String input = "";
 
         do {
-				try {
+            try {
 				/**
 				* Check user selection and proceed selected operation
 				*/
-				System.out.println("\nEnter '1' to add new client, or '2' to remove existent, or '0' to quit.");
-				System.out.println("To change client name enter '3', to change pet name enter '4'.");
-				System.out.println("To find pet name by client ID enter '5', or to find by name '6'.");
-				System.out.println("To find client name by pet name enter '7'\n");
+				System.out.println("\nWelcome to pet clinic accounting program! Usage:");
+				System.out.println(" 1 - add new client, 2 - remove existing client");
+                System.out.println(" 3 - change client name, 4 - change pet name");
+				System.out.println(" 5 - to find pet name by client ID, 6 - to find pet by client name");
+				System.out.println(" 7 - to find client name by pet name, 8 - to get client ID by name");
+                System.out.println(" 0 - to quit \n");
 				enter = scan.nextInt();
 				if(enter == 1) {
-					System.out.println("Enter '1' to add cat, or '2' to add dog\n");
+					System.out.println("\n Cats and dogs are examined in different outhouses.\n" +
+                            " Enter 1 - if pet is cat, 2 - if pet is dog.");
 					type = scan.nextInt();
 					if(type == 1) {
-						System.out.println("\nEnter ID, name of client, name of his pet, e.g. \"1 Mike Poppy\"");
+						System.out.println("\n Enter ID, name of client, name of his pet, e.g. \"1 Mike Poppy\"");
 						ID = scan.nextInt();
 						// check for prevent outbound exception
-						if (ID < 1 || ID > 10) {
-							throw new UserException("Invalid ID");
+						if (ID < 1 || ID > size) {
+							throw new UserException(" Invalid ID");
 						} else
 							myClinic.addClient(ID, new Client(scan.next(), new Cat(scan.next())));
 					} else if (type == 2) {
-						System.out.println("\nEnter ID, name of client, name of his pet, e.g. \"1 Mike Poppy\"");
+						System.out.println("\n Enter ID, name of client, name of his pet, e.g. \"1 Mike Poppy\"");
 						ID = scan.nextInt();
-						if (ID < 1 || ID > 10) {
-							throw new UserException("Invalid ID");
+						if (ID < 1 || ID > size) {
+							throw new UserException(" Invalid ID");
 						} else
 							myClinic.addClient(ID, new Client(scan.next(), new Dog(scan.next())));
 					} else {
-						System.out.println("\nInvalid type of pet.");
+						System.out.println("\n Invalid type of pet.");
 						continue;
 					}
 				} else if (enter == 2) {
-					System.out.println("\nEnter ID of client to remove:\n");
+					System.out.println("\n Enter ID of client to remove:\n");
 					ID = scan.nextInt();
-					if (ID < 1 || ID > 10) {
-						throw new UserException("Invalid ID");
+					if (ID < 1 || ID > size) {
+						throw new UserException(" Invalid ID");
 					} else
 						myClinic.removeClient(ID);
 				} else if (enter == 3) {
-					System.out.println("\nEnter client ID and new name, e.g. \"1 Tom\":\n");
+					System.out.println("\n Enter client ID and new name, e.g. \"1 Tom\":\n");
 					ID = scan.nextInt();
-					if (ID < 1 || ID > 10) {
-						throw new UserException("Invalid ID");
+					if (ID < 1 || ID > size) {
+						throw new UserException(" Invalid ID");
 					} else
 						myClinic.changeClientName(ID, scan.next());
 				} else if (enter == 4) {
-					System.out.println("\nEnter client ID and new pet name, e.g. \"1 Jerry\":\n");
+					System.out.println("\n Enter client ID and new pet name, e.g. \"1 Jerry\":\n");
 					ID = scan.nextInt();
-					if (ID < 1 || ID > 10) {
-						throw new UserException("Invalid ID");
+					if (ID < 1 || ID > size) {
+						throw new UserException(" Invalid ID");
 					} else
 						myClinic.changePetName(ID, scan.next());
 				} else if (enter == 5) {
-					System.out.println("\nEnter client ID:\n");
+					System.out.println("\n Enter client ID:");
 					ID = scan.nextInt();
-					if (ID < 1 || ID > 10) {
-						throw new UserException("Invalid ID");
+					if (ID < 1 || ID > size) {
+						throw new UserException(" Invalid ID");
 					} else
 						System.out.println(myClinic.getPetName(ID));
 				} else if (enter == 6) {
-					System.out.println("\nEnter client name:\n");
-					System.out.println("\n" + myClinic.getPetNameByClientName(scan.next()));
+					System.out.println("\n Enter client name:");
+                    input = scan.next();
+					System.out.println("\n " + input + " has " + myClinic.getPetNameByClientName(input));
 				} else if (enter == 7) {
-					System.out.println("\nEnter pet name:\n");
-					System.out.println("\n" + myClinic.getClientNameByPetName(scan.next()));
-				} else if(enter == 0)
+					System.out.println("\n Enter pet name:");
+                    input = scan.next();
+					System.out.println("\n" + input + " is " + myClinic.getClientNameByPetName(input) + "'s pet");
+				} else if (enter == 8) {
+                    System.out.println("\nEnter client name:");
+                    input = scan.next();
+                    System.out.println("\n " + input + "'s ID is " + myClinic.getClientIDByClientName(input));
+                }else if(enter == 0)
 					continue;
 				else 
-					System.out.println("\nInvalid operation type.");
-				} catch (NumberFormatException | InputMismatchException e) {
-					System.out.println("Error occurred.");
-				} catch (UserException e) {
-					System.out.println(e);
-				}
-			} while(enter != 0);
+					System.out.println("\n Invalid operation type.");
+            } catch (NumberFormatException | InputMismatchException e) {
+                System.out.println(" Input error.");
+                scan.next();
+            } catch (UserException e) {
+                System.out.println(e);
+            }
+        } while(enter != 0);
 
 		scan.close();
 	}

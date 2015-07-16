@@ -103,4 +103,18 @@ public class Clinic {
 			throw new UserException("No such client");
 		return clientName;
 	}
+
+	public int getClientIDByClientName(String name) throws UserException {
+		int ID = 0;
+		for (int i = 0; i < clients.length; i++) {
+			Client client = clients[i];
+			if (client.getName().equals(name)) {
+				ID = i + 1;
+				break;
+			}
+		}
+		if (ID == 0)
+			throw new UserException("No such client");
+		return ID;
+	}
 }
