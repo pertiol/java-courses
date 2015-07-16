@@ -1,3 +1,4 @@
+package com.lessons;
 /**
  * Class for describing dog
  */

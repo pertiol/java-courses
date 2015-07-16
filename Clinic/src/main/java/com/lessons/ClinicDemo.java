@@ -1,3 +1,4 @@
+package com.lessons;
 import java.util.*;
 /**
  * Demo Clinic class
@@ -12,18 +13,15 @@ public class ClinicDemo {
 		Scanner scan = new Scanner(System.in).useLocale(Locale.US);
 		// Create new clinic of size 10
 		Clinic myClinic = new Clinic(10);
-		/**
-		 * Fill client list
-		 */
-		myClinic.fillList();
 		// user enter
 		int enter = 1;
 		// user ID (position in array)
 		int ID = 0;
 		// type of pet
 		int type = 0;
-		try {
-			do {
+
+        do {
+				try {
 				/**
 				* Check user selection and proceed selected operation
 				*/
@@ -40,16 +38,14 @@ public class ClinicDemo {
 						ID = scan.nextInt();
 						// check for prevent outbound exception
 						if (ID < 1 || ID > 10) {
-							System.out.println("\nInvalid ID.");
-							continue;
+							throw new UserException("Invalid ID");
 						} else
 							myClinic.addClient(ID, new Client(scan.next(), new Cat(scan.next())));
 					} else if (type == 2) {
 						System.out.println("\nEnter ID, name of client, name of his pet, e.g. \"1 Mike Poppy\"");
 						ID = scan.nextInt();
 						if (ID < 1 || ID > 10) {
-							System.out.println("\nInvalid ID.");
-							continue;
+							throw new UserException("Invalid ID");
 						} else
 							myClinic.addClient(ID, new Client(scan.next(), new Dog(scan.next())));
 					} else {
@@ -60,48 +56,47 @@ public class ClinicDemo {
 					System.out.println("\nEnter ID of client to remove:\n");
 					ID = scan.nextInt();
 					if (ID < 1 || ID > 10) {
-						System.out.println("Invalid ID.");
-						continue;
+						throw new UserException("Invalid ID");
 					} else
 						myClinic.removeClient(ID);
 				} else if (enter == 3) {
 					System.out.println("\nEnter client ID and new name, e.g. \"1 Tom\":\n");
 					ID = scan.nextInt();
 					if (ID < 1 || ID > 10) {
-						System.out.println("\nInvalid ID.");
-						continue;
+						throw new UserException("Invalid ID");
 					} else
 						myClinic.changeClientName(ID, scan.next());
 				} else if (enter == 4) {
 					System.out.println("\nEnter client ID and new pet name, e.g. \"1 Jerry\":\n");
 					ID = scan.nextInt();
 					if (ID < 1 || ID > 10) {
-						System.out.println("\nInvalid ID.");
-						continue;
+						throw new UserException("Invalid ID");
 					} else
 						myClinic.changePetName(ID, scan.next());
 				} else if (enter == 5) {
 					System.out.println("\nEnter client ID:\n");
 					ID = scan.nextInt();
 					if (ID < 1 || ID > 10) {
-						System.out.println("\nInvalid ID.");
-						continue;
+						throw new UserException("Invalid ID");
 					} else
 						System.out.println(myClinic.getPetName(ID));
 				} else if (enter == 6) {
 					System.out.println("\nEnter client name:\n");
-					System.out.println("\n" + myClinic.getPetNamebyClientName(scan.next()));
+					System.out.println("\n" + myClinic.getPetNameByClientName(scan.next()));
 				} else if (enter == 7) {
 					System.out.println("\nEnter pet name:\n");
-					System.out.println("\n" + myClinic.getClientNamebyPetName(scan.next()));
+					System.out.println("\n" + myClinic.getClientNameByPetName(scan.next()));
 				} else if(enter == 0)
 					continue;
 				else 
 					System.out.println("\nInvalid operation type.");
+				} catch (NumberFormatException | InputMismatchException e) {
+					System.out.println("Error occurred.");
+				} catch (UserException e) {
+					System.out.println(e);
+				}
 			} while(enter != 0);
-		} catch (NumberFormatException | InputMismatchException e) {
-			System.out.println("Error occurred.");
-		}
+
 		scan.close();
 	}
 }

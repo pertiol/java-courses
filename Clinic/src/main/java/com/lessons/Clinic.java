@@ -1,4 +1,4 @@
-import java.util.*;
+package com.lessons;
 
 /**
  * Class describes pet clinic
@@ -15,6 +15,7 @@ public class Clinic {
 	
 	public Clinic(int size){
 		this.clients = new Client[size];
+        this.fillList();
 	}
 	
 	/**
@@ -23,7 +24,7 @@ public class Clinic {
 	public void fillList(){
 		for (int i=0; i < clients.length; i++) {
 			clients[i] = new Client("No such client", new Pet("No such client"));
-		} 
+		}
 	}
 
 	/**
@@ -72,15 +73,17 @@ public class Clinic {
 	 * Get pet name by client name
 	 * @param name client name
 	 */
-	public String getPetNamebyClientName(String name){
+	public String getPetNameByClientName(String name) throws UserException {
 		String petName = "";
-		for(int i=0; i < clients.length; i++) {
-			if (clients[i].getName().equals(name)) {
-				petName = clients[i].getPetName();
-				petName += " " + clients[i].getType();
+		for (Client client : clients) {
+			if (client.getName().equals(name)) {
+				petName = client.getPetName();
+				petName += " " + client.getType();
 				break;
 			}
 		}
+		if (petName.equals(""))
+			throw new UserException("No such pet");
 		return petName;
 	}
 	
@@ -88,14 +91,16 @@ public class Clinic {
 	 * Get client name by pet name
 	 * @param name pet name
 	 */
-	public String getClientNamebyPetName(String name){
+	public String getClientNameByPetName(String name) throws UserException {
 		String clientName = "";
-		for(int i=0; i < clients.length; i++) {
-			if (clients[i].getPetName().equals(name)) {
-				clientName = clients[i].getName();
+		for (Client client : clients) {
+			if (client.getPetName().equals(name)) {
+				clientName = client.getName();
 				break;
 			}
 		}
+		if (clientName.equals(""))
+			throw new UserException("No such client");
 		return clientName;
 	}
 }

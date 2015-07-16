@@ -1,4 +1,4 @@
-
+package com.lessons;
 /**
  * Class describes client
  * @author pertiol
@@ -46,7 +46,7 @@ public class Client {
 	}
 	/**
 	 * Change client's pet name
-	 * @param name new pet name
+	 * @param petName new pet name
 	 */
 	void changePetName(String petName) {
 		this.pet.changePetName(petName);
