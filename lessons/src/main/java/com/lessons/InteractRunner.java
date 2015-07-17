@@ -29,11 +29,12 @@ public class InteractRunner {
 		 */
 		boolean saveResult = false;
 		double first = 0, second = 0;
-		try{
+
 			/**
 			 * Loop performing while user won't input "yes"
 			 */
-			while(!exit.equals("yes")) {
+		while(!exit.equals("yes")) {
+			try{
 				System.out.println("Enter the first number: ");
 				/**
 				 * Check whether user wanted to save result <br>
@@ -71,26 +72,31 @@ public class InteractRunner {
 				/**
 				 * Check operation for performing, if incorrect - continue loop from beginning
 				 */
-				switch (operation) {
-					case "+":
-						calc.add(first, second);
-						break;
-					case "*":
-						calc.mult(first, second);
-						break;
-					case "-":
-						calc.sub(first, second);
-						break;
-					case "/":
-						calc.div(first, second);
-						break;
-					case "^":
-						calc.pow(first, second);
-						break;
-					default:
-						System.out.println("Incorrect operation.");
-						continue;
-				}
+                switch (operation) {
+                    case "+":
+                        calc.add(first, second);
+
+                        break;
+                    case "*":
+                        calc.mult(first, second);
+
+                        break;
+                    case "-":
+                        calc.sub(first, second);
+
+                        break;
+                    case "/":
+                        calc.div(first, second);
+
+                        break;
+                    case "^":
+                        calc.pow(first, second);
+
+                        break;
+                    default:
+                        System.out.println("Incorrect operation.");
+                        continue;
+                }
 				System.out.println("Result is " + calc.getResult());
 				/**
 				 * Ask if user want to quit and store answer to "exit"
@@ -105,18 +111,20 @@ public class InteractRunner {
 				System.out.println("Do you want to save result? (\"yes\" or \"no\")");
 				if (scan.next().equals("yes")) {
 					saveResult = true;
-					System.out.println("Type \"MR\" instead needed operand to recall result from memory.");
+					System.out.println("Type \"MR\" instead of needed operand to recall result from memory.");
 				} else {
 					saveResult = false;
 					calc.clearResult();
 				}
+				/**
+				 * Catch possible exceptions
+				 */
+			} catch (NumberFormatException | InputMismatchException e) {
+				System.out.println("Error occurred.");
+                scan.next();
 			}
-		/**
-		 * Catch possible exceptions
-		 */
-		} catch (NumberFormatException | InputMismatchException e) {
-			System.out.println("Error occurred.");
 		}
+
 		scan.close();		
 		
 	}

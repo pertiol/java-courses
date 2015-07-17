@@ -6,16 +6,36 @@ package com.lessons;
  */
 public class Client {
 	private String name;
+	private int ID;
 	private Pet pet;
 	/**
 	 * Constructor for Client
+	 * @param ID ID of client
 	 * @param name client name
 	 * @param pet object of type Pet
 	 */
-	public Client(String name, Pet pet) {
+	public Client(int ID, String name, Pet pet) {
+		this.ID = ID;
 		this.name = name;
 		this.pet = pet;
 	}
+
+	/**
+	 * Returns ID of client
+	 * @return ID of client
+	 */
+	public int getID() {
+		return ID;
+	}
+
+	/**
+	 * Set ID for client
+	 * @param ID ID of client
+	 */
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+
 	/**
 	 * Change client name
 	 * @param name new client name
@@ -51,4 +71,12 @@ public class Client {
 	void changePetName(String petName) {
 		this.pet.changePetName(petName);
 	}
+
+    /**
+     * Get dog's breed
+     * @return breed
+     */
+    public String getBreed() {
+        return this.pet.getBreed();
+    }
 }

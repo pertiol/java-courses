@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
  *         2015-07-16
  */
 public class ClinicTest {
-    Clinic clinic = new Clinic(10);
+    Clinic clinic = new Clinic();
 
     @Test (expected = UserException.class)
     public void testGetPetNameByClientName() throws Exception {

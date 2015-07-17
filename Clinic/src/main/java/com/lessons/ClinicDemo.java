@@ -11,9 +11,9 @@ public class ClinicDemo {
 	public static void main(String args[]) {
 		// Create new scanner
 		Scanner scan = new Scanner(System.in).useLocale(Locale.US);
-        int size = 20;
+        int size = 2000000;
 		// Create new clinic with size in size
-		Clinic myClinic = new Clinic(size);
+		Clinic myClinic = new Clinic();
 		// user enter
 		int enter = 1;
 		// user ID (position in array)
@@ -40,20 +40,13 @@ public class ClinicDemo {
                             " Enter 1 - if pet is cat, 2 - if pet is dog.");
 					type = scan.nextInt();
 					if(type == 1) {
-						System.out.println("\n Enter ID, name of client, name of his pet, e.g. \"1 Mike Poppy\"");
+						System.out.println("\n Enter ID, name of client, name of his cat, e.g. \"1 Mike Poppy\"");
 						ID = scan.nextInt();
-						// check for prevent outbound exception
-						if (ID < 1 || ID > size) {
-							throw new UserException(" Invalid ID");
-						} else
-							myClinic.addClient(ID, new Client(scan.next(), new Cat(scan.next())));
+						myClinic.addClient(new Client(ID, scan.next(), new Cat(scan.next())));
 					} else if (type == 2) {
-						System.out.println("\n Enter ID, name of client, name of his pet, e.g. \"1 Mike Poppy\"");
+						System.out.println("\n Enter ID, name of client, name and breed of his dog, e.g. \"1 Mike Poppy Bulldog\"");
 						ID = scan.nextInt();
-						if (ID < 1 || ID > size) {
-							throw new UserException(" Invalid ID");
-						} else
-							myClinic.addClient(ID, new Client(scan.next(), new Dog(scan.next())));
+						myClinic.addClient(new Client(ID, scan.next(), new Dog(scan.next(), scan.next())));
 					} else {
 						System.out.println("\n Invalid type of pet.");
 						continue;
@@ -61,31 +54,19 @@ public class ClinicDemo {
 				} else if (enter == 2) {
 					System.out.println("\n Enter ID of client to remove:\n");
 					ID = scan.nextInt();
-					if (ID < 1 || ID > size) {
-						throw new UserException(" Invalid ID");
-					} else
-						myClinic.removeClient(ID);
+					myClinic.removeClient(ID);
 				} else if (enter == 3) {
 					System.out.println("\n Enter client ID and new name, e.g. \"1 Tom\":\n");
 					ID = scan.nextInt();
-					if (ID < 1 || ID > size) {
-						throw new UserException(" Invalid ID");
-					} else
-						myClinic.changeClientName(ID, scan.next());
+					myClinic.changeClientName(ID, scan.next());
 				} else if (enter == 4) {
 					System.out.println("\n Enter client ID and new pet name, e.g. \"1 Jerry\":\n");
 					ID = scan.nextInt();
-					if (ID < 1 || ID > size) {
-						throw new UserException(" Invalid ID");
-					} else
-						myClinic.changePetName(ID, scan.next());
+					myClinic.changePetName(ID, scan.next());
 				} else if (enter == 5) {
 					System.out.println("\n Enter client ID:");
 					ID = scan.nextInt();
-					if (ID < 1 || ID > size) {
-						throw new UserException(" Invalid ID");
-					} else
-						System.out.println(myClinic.getPetName(ID));
+					System.out.println(myClinic.getPetName(ID));
 				} else if (enter == 6) {
 					System.out.println("\n Enter client name:");
                     input = scan.next();

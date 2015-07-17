@@ -2,7 +2,7 @@ package com.lessons;
 /**
  * Class for describing pet
  */
-public class Pet {
+public abstract class Pet {
 	private String petName;
 	/**
 	 * Standard constructor
@@ -29,4 +29,6 @@ public class Pet {
 	public void changePetName(String petName) {
 		this.petName = petName;
 	}
+
+    public abstract String getBreed();
 }

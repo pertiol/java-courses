@@ -5,16 +5,20 @@ package com.lessons;
 
 public class Cat extends Pet {
 	/**
-	 * {@inheritdoc}
+	 * {@inheritDoc}
 	 */
 	Cat(String catName) {
 		super(catName);
 	}
 	/**
-	 * {@inheritdoc}
+	 * {@inheritDoc}
 	 */
 	@Override
 	String getType() {
 		return "Cat";
+	}
+
+	public String getBreed() {
+		return "";
 	}
 }
